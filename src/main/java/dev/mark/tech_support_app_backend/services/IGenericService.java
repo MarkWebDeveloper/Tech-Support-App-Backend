@@ -10,5 +10,4 @@ public interface IGenericService<T> {
     public T save(T obj);
     public T update(Long id, T obj) throws Exception;
     public Message delete (Long id) throws Exception;
-    public T getByTitle(String title) throws Exception;
 }
