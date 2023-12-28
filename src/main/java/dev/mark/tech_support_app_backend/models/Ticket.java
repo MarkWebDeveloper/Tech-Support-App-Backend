@@ -1,5 +1,7 @@
 package dev.mark.tech_support_app_backend.models;
 
+import java.util.Date;
+
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -24,11 +26,11 @@ public class Ticket {
 
     @Column(name = "created_date", nullable = false, updatable = false)
     @CreatedDate
-    private long createdDate;
+    private Date createdDate;
 
     @Column(name = "modified_date")
     @LastModifiedDate
-    private long modifiedDate;
+    private Date modifiedDate;
 
     @Column
     private String problem_type;
@@ -42,7 +44,7 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(long createdDate, long modifiedDate, String problem_type, String description, String status) {
+    public Ticket(Date createdDate, Date modifiedDate, String problem_type, String description, String status) {
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
         this.problem_type = problem_type;
@@ -58,19 +60,19 @@ public class Ticket {
         this.id = id;
     }
 
-    public long getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(long createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
-    public long getModifiedDate() {
+    public Date getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(long modifiedDate) {
+    public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 
@@ -97,6 +99,5 @@ public class Ticket {
     public void setStatus(String status) {
         this.status = status;
     }
-       
     
 }
