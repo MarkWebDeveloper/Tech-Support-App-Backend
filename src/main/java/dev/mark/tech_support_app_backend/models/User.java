@@ -1,10 +1,15 @@
 package dev.mark.tech_support_app_backend.models;
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,6 +31,13 @@ public class User {
     private String password;
 
     @Column Boolean type;
+
+    @ManyToMany
+    @JoinTable(
+        name = "tickets_users",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "ticket_id"))
+    private Set<Ticket> tickets;
 
     public User() {
     }
@@ -76,4 +88,13 @@ public class User {
     public void setType(Boolean type) {
         this.type = type;
     }
+
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
 }

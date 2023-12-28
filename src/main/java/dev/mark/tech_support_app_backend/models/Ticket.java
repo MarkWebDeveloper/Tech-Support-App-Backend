@@ -1,6 +1,7 @@
 package dev.mark.tech_support_app_backend.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -12,6 +13,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,11 +28,11 @@ public class Ticket {
 
     @Column(name = "created_date", nullable = false, updatable = false)
     @CreatedDate
-    private Date createdDate;
+    private Date created_date;
 
     @Column(name = "modified_date")
     @LastModifiedDate
-    private Date modifiedDate;
+    private Date modified_date;
 
     @Column
     private String problem_type;
@@ -41,16 +43,22 @@ public class Ticket {
     @Column
     private String status;
 
+    @ManyToMany(mappedBy = "tickets")
+    private List<User> users;
+
     public Ticket() {
     }
 
-    public Ticket(Date createdDate, Date modifiedDate, String problem_type, String description, String status) {
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
+    public Ticket(Date created_date, Date modified_date, String problem_type, String description, String status,
+            List<User> users) {
+        this.created_date = created_date;
+        this.modified_date = modified_date;
         this.problem_type = problem_type;
         this.description = description;
         this.status = status;
+        this.users = users;
     }
+
 
     public Long getId() {
         return id;
@@ -58,22 +66,6 @@ public class Ticket {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getModifiedDate() {
-        return modifiedDate;
-    }
-
-    public void setModifiedDate(Date modifiedDate) {
-        this.modifiedDate = modifiedDate;
     }
 
     public String getProblem_type() {
@@ -99,5 +91,21 @@ public class Ticket {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
+    public Date getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(Date created_date) {
+        this.created_date = created_date;
+    }
+
+    public Date getModified_date() {
+        return modified_date;
+    }
+
+    public void setModified_date(Date modified_date) {
+        this.modified_date = modified_date;
+    }
+
 }
