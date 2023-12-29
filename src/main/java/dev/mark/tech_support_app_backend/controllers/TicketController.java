@@ -47,9 +47,9 @@ public class TicketController {
     @PostMapping(path = "")
     public ResponseEntity<Ticket> create(@RequestBody Ticket ticket) {
 
-        Ticket newUser = service.save(ticket);
+        Ticket newTicket = service.save(ticket);
 
-        return ResponseEntity.status(201).body(newUser);
+        return ResponseEntity.status(201).body(newTicket);
     }
 
     @PutMapping("/{id}")

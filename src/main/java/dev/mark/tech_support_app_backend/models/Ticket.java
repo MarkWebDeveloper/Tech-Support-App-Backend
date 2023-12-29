@@ -107,5 +107,4 @@ public class Ticket {
     public void setModified_date(Date modified_date) {
         this.modified_date = modified_date;
     }
-
 }

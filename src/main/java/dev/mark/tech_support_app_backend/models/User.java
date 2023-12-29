@@ -42,11 +42,12 @@ public class User {
     public User() {
     }
 
-    public User(String name, String username, String password, Boolean type) {
+    public User(String name, String username, String password, Boolean type, Set<Ticket> tickets) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.type = type;
+        this.tickets = tickets;
     }
 
     public Long getId() {

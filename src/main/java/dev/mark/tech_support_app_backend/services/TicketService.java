@@ -20,8 +20,8 @@ public class TicketService implements IGenericService<Ticket> {
     }
 
     public List<Ticket> getAll() {
-        List<Ticket> movies = repository.findAll();
-        return movies;
+        List<Ticket> tickets = repository.findAll();
+        return tickets;
     }
 
     public Ticket getById(Long id) throws Exception {

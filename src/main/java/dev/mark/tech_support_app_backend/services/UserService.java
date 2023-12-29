@@ -19,8 +19,8 @@ public class UserService implements IGenericService<User> {
     }
 
     public List<User> getAll() {
-        List<User> movies = repository.findAll();
-        return movies;
+        List<User> users = repository.findAll();
+        return users;
     }
 
     public User getById(Long id) throws Exception {
