@@ -2,6 +2,7 @@ package dev.mark.tech_support_app_backend.models;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class User {
 
     @Column Boolean type;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "tickets_users",
         joinColumns = @JoinColumn(name = "user_id"),
