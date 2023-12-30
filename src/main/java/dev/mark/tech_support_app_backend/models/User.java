@@ -8,9 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,11 +32,8 @@ public class User {
 
     @Column Boolean type;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-        name = "tickets_users",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "ticket_id"))
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ticket_id", nullable = true)
     private Set<Ticket> tickets;
 
     public User() {
