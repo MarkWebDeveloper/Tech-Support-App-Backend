@@ -59,7 +59,7 @@ public class UserService implements IGenericService<User> {
 
         Message message = new Message();
 
-        message.setMessage(userName + " is deleted from the movies table");
+        message.setMessage(userName + " is deleted from the users table");
 
         return message;
     }

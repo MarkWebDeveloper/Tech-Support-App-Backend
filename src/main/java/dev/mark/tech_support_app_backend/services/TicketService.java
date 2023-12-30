@@ -59,7 +59,7 @@ public class TicketService implements IGenericService<Ticket> {
 
         Message message = new Message();
 
-        message.setMessage("Ticket number " + ticketId + " is deleted from the movies table");
+        message.setMessage("Ticket number " + ticketId + " is deleted from the tickets table");
 
         return message;
     }

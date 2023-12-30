@@ -1,7 +1,6 @@
 package dev.mark.tech_support_app_backend.models;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -13,7 +12,8 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -43,22 +43,19 @@ public class Ticket {
     @Column
     private String status;
 
-    @OneToMany(mappedBy = "tickets")
-    private List<User> users;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = true)
+    private User user;
 
     public Ticket() {
     }
 
-    public Ticket(Date created_date, Date modified_date, String problem_type, String description, String status,
-            List<User> users) {
-        this.created_date = created_date;
-        this.modified_date = modified_date;
+    public Ticket(String problem_type, String description, String status, User user) {
         this.problem_type = problem_type;
         this.description = description;
         this.status = status;
-        this.users = users;
+        this.user = user;
     }
-
 
     public Long getId() {
         return id;
