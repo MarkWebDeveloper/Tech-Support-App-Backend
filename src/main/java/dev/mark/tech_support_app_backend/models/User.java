@@ -2,6 +2,8 @@ package dev.mark.tech_support_app_backend.models;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,6 +33,7 @@ public class User {
 
     @Column Boolean type;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Ticket> tickets;
 

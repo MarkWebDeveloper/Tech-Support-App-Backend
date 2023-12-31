@@ -6,15 +6,19 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -43,18 +47,23 @@ public class Ticket {
     @Column
     private String status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = true)
+    @JsonBackReference
     private User user;
+
+    @Transient
+    private Long userId;
 
     public Ticket() {
     }
 
-    public Ticket(String problem_type, String description, String status, User user) {
+    public Ticket(String problem_type, String description, String status, User user, Long userId) {
         this.problem_type = problem_type;
         this.description = description;
         this.status = status;
         this.user = user;
+        this.userId = userId;
     }
 
     public Long getId() {
@@ -103,5 +112,17 @@ public class Ticket {
 
     public void setModified_date(Date modified_date) {
         this.modified_date = modified_date;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Long getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

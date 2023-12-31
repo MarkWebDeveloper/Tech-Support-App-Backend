@@ -1,22 +1,26 @@
 package dev.mark.tech_support_app_backend.services;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import dev.mark.tech_support_app_backend.exceptions.TicketNotFoundException;
+import dev.mark.tech_support_app_backend.exceptions.UserNotFoundException;
 import dev.mark.tech_support_app_backend.messages.Message;
 import dev.mark.tech_support_app_backend.models.Ticket;
+import dev.mark.tech_support_app_backend.models.User;
 import dev.mark.tech_support_app_backend.repositories.TicketRepository;
+import dev.mark.tech_support_app_backend.repositories.UserRepository;
 
 
 @Service
 public class TicketService implements IGenericService<Ticket> {
     
     TicketRepository repository;
+    UserRepository userRepository;
 
-    public TicketService(TicketRepository repository) {
+    public TicketService(TicketRepository repository, UserRepository userRepository) {
         this.repository = repository;
+        this.userRepository = userRepository;
     }
 
     public List<Ticket> getAll() {
@@ -30,9 +34,23 @@ public class TicketService implements IGenericService<Ticket> {
         return ticket;
     }
 
-    public Ticket save(Ticket ticket) {
+    // public Ticket save(Ticket ticket) {
         
-        Ticket newTicket = repository.save(ticket);
+    //     Ticket newTicket = repository.save(ticket);
+    //     return newTicket;
+    // }
+
+    public Ticket save(Ticket newTicket) {
+        // find the user
+        User user = userRepository.findById(newTicket.getUserId())
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        // associate the ticket with the user
+        newTicket.setUser(user);
+
+        // save the ticket
+
+        repository.save(newTicket);
         return newTicket;
     }
 
