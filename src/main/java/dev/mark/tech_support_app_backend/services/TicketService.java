@@ -34,21 +34,11 @@ public class TicketService implements IGenericService<Ticket> {
         return ticket;
     }
 
-    // public Ticket save(Ticket ticket) {
-        
-    //     Ticket newTicket = repository.save(ticket);
-    //     return newTicket;
-    // }
-
     public Ticket save(Ticket newTicket) {
-        // find the user
         User user = userRepository.findById(newTicket.getUserId())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
-        // associate the ticket with the user
         newTicket.setUser(user);
-
-        // save the ticket
 
         repository.save(newTicket);
         return newTicket;
